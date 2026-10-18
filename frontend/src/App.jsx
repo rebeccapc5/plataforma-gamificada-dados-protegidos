@@ -36,12 +36,16 @@ export default function App() {
   const progressPercentage = Math.min((currentLevelXP / xpPerLevel) * 100, 100);
   const xpNeeded = xpPerLevel - currentLevelXP;
 
-  // func p concluir treino, somar xp e atualizar o ranking 
+  // concluir treino, somar xp e atualizar nivel
   const completeTraining = (id, reward) => {
     setTrainings(trainings.map(t => t.id === id ? { ...t, status: 'Concluído' } : t));
     
     const newXP = user.xp + reward;
-    const newLevel = Math.floor(newXP / xpPerLevel) + 1;
+    
+    // sobe nivel
+    const currentLevelXP = user.xp % xpPerLevel;
+    const gainedLevel = Math.floor((currentLevelXP + reward) / xpPerLevel);
+    const newLevel = user.level + gainedLevel;
 
     setUser(prev => ({
       ...prev,
@@ -49,7 +53,7 @@ export default function App() {
       level: newLevel
     }));
 
-    // atualizar pts no ranking
+    // atualiza os pts no ranking
     setRanking(prevRanking =>
       prevRanking
         .map(player => player.name.includes('Você') ? { ...player, xp: newXP, level: newLevel } : player)
@@ -57,6 +61,7 @@ export default function App() {
         .map((player, index) => ({ ...player, rank: index + 1 }))
     );
   };
+
 
   return (
     <div style={{ padding: '30px', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", backgroundColor: '#5c94fc', color: '#fff', minHeight: '100vh' }}>
