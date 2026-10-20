@@ -128,3 +128,25 @@ body {
   background-color: #e6f4ea;
   border-left: 4px solid #34a853;
 }
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Efeito de destaque para os Badges */
+.badge-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 6px 6px 0px #000 !important;
+  background-color: #ffdf0d66 !important;
+}

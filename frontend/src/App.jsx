@@ -223,7 +223,11 @@ export default function App() {
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px', marginTop: '15px' }}>
           {user.badges.map(badge => (
-            <div key={badge.id} style={{ display: 'flex', alignItems: 'center', background: '#fff', padding: '15px', borderRadius: '8px', border: '2px solid #000' }}>
+            <div 
+                 key={badge.id} 
+                 className="badge-item"
+                 style={{ display: 'flex', alignItems: 'center', background: '#fff', padding: '15px', borderRadius: '8px', border: '2px solid #000' }}
+                 >
               <span style={{ fontSize: '32px', marginRight: '15px' }}>{badge.icon}</span>
               <div>
                 <strong style={{ color: '#000', display: 'block' }}>{badge.title}</strong>
